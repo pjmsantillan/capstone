@@ -36,8 +36,6 @@ Route::get('/news-articles', [HeadlineController::class, 'index'])->name('news-a
 Route::get('/profile', [UserProfileController::class, 'index'])->name('profile');
 
 
-//handling data
-Route::post('/handle-read-more-click', [HeadlineController::class, 'handleReadMoreClick']);
 
 //data
 Route::post('/favorite', [HeadlineController::class,'store'])->name('favorite.store');

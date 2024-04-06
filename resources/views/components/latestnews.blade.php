@@ -22,8 +22,58 @@
         text-decoration: none; /* Remove underline */
         cursor: pointer; /* Change cursor to pointer */
     }
-    
+    button{
+        appearance: button;
+    background-color:  #002C70;
+    background-image: none;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0 5px 10px 0;
+    overflow: visible;
+    padding: 12px 40px;
+    text-align: center;
+    text-transform: none;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    }
+
+    .button-50:focus {
+    text-decoration: none;
+    }
+
+    .button-50:hover {
+    text-decoration: none;
+    }
+
+    .button-50:active {
+    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+    outline: 0;
+    }
+
+    .button-50:not([disabled]):active {
+    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+    transform: translate(2px, 2px);
+    }
+
+    @media (min-width: 768px) {
+    .button-50 {
+        padding: 12px 50px;
+    }
+    }
 </style>
+
 <h1 class="text-left mb-4">Latest News</h1>
 @if(count($latestNews ?? []) > 0)
     <div id="latestNewsCarousel" class="carousel slide" data-ride="carousel">
@@ -40,8 +90,10 @@
                                             <h5 class="card-title">{{ $latestNews[$i]['title'] }}</h5>
                                             <p class="card-text">{{ $latestNews[$i]['description'] }}</p>
                                             <a href="{{ $latestNews[$i]['url'] }}"  target="_blank">Read more...</a>
+                                            <footer class="footer" style="padding-top: 10px;">
                                             <button class="add-favorite" data-title="{{ $latestNews[$i]['title']}}"
-                                            data-description=" $latestNews[$i]['description']"data-url="{{ $latestNews[$i]['url']}} ">Add favorite</button>
+                                            data-description=" {{$latestNews[$i]['description']}}"data-url="{{ $latestNews[$i]['url']}}">Add favorite</button>  
+                                            </footer>
                                         </div>
                                     </div>
                                 </div>
@@ -63,32 +115,8 @@
 @else
     <p>No latest news articles available at the moment.</p>
 @endif
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var addFavoriteButtons = document.querySelectorAll('.add-favorite');
 
-        addFavoriteButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var articleTitle = button.parentElement.querySelector('.card-title').innerText;
-                var articleDescription = button.parentElement.querySelector('.card-text').innerText;
-                var articleUrl = button.getAttribute('data-url');
-                // Perform further actions with the captured URL
-                console.log('Favorite Title: ' + articleTitle+'Favorite Decription: ' + articleDescription+ articleUrl);
-                // You can send this URL to your backend for further processing, e.g., storing it in the user's favorites list
-                fetch('/favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        url: articleUrl
-                    })
-                })
-            });
-        });
-    });
-</script>
+
 
 <h1 class="text-left mb-4">Sport News</h1>
 @if(count($sportsNews ?? []) > 0)
@@ -105,7 +133,12 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $sportsNews[$i]['title'] }}</h5>
                                             <p class="card-text">{{ $sportsNews[$i]['description'] }}</p>
-                                            <a href="{{ $sportsNews[$i]['url'] }}"  target="_blank">Read more</a>
+                                            <a href="{{ $sportsNews[$i]['url'] }}"  target="_blank">Read more...</a>
+                                            <footer class="footer" style="padding-top: 10px;">
+                                            <button class="add-favorite" data-title="{{ $sportsNews[$i]['title']}}"
+                                            data-description=" {{$sportsNews[$i]['description']}}"data-url="{{ $sportsNews[$i]['url']}} ">Add favorite</button>
+                                            </footer>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +177,12 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $techNews[$i]['title'] }}</h5>
                                             <p class="card-text">{{ $techNews[$i]['description'] }}</p>
-                                            <a href="{{ $techNews[$i]['url'] }}" target="_blank">Read more</a>
+                                            <a href="{{ $techNews[$i]['url'] }}"  target="_blank">Read more...</a>
+                                            <footer class="footer" style="padding-top: 10px;">
+                                            <button class="add-favorite" data-title="{{ $techNews[$i]['title']}}"
+                                            data-description=" {{$techNews[$i]['description']}}"data-url="{{ $techNews[$i]['url']}} ">Add favorite</button>
+                                            </footer>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +220,12 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $entertainmentNews[$i]['title'] }}</h5>
                                             <p class="card-text">{{ $entertainmentNews[$i]['description'] }}</p>
-                                            <a href="{{ $entertainmentNews[$i]['url'] }}"  target="_blank">Read more</a>
+                                            <a href="{{ $entertainmentNews[$i]['url'] }}"  target="_blank">Read more...</a>
+                                            <footer class="footer" style="padding-top: 10px;">
+                                            <button class="add-favorite" data-title="{{ $entertainmentNews[$i]['title']}}"
+                                            data-description=" {{$entertainmentNews[$i]['description']}}"data-url="{{ $entertainmentNews[$i]['url']}} ">Add favorite</button>
+                                            </footer>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +263,12 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $healthNews[$i]['title'] }}</h5>
                                             <p class="card-text">{{ $healthNews[$i]['description'] }}</p>
-                                            <a href="{{ $healthNews[$i]['url'] }}"  target="_blank">Read more</a>
+                                            <a href="{{ $healthNews[$i]['url'] }}"  target="_blank">Read more...</a>
+                                            <footer class="footer" style="padding-top: 10px;">
+                                            <button class="add-favorite" data-title="{{ $healthNews[$i]['title']}}"
+                                            data-description="{{$healthNews[$i]['description']}}"data-url="{{ $healthNews[$i]['url']}} ">Add favorite</button>
+                                            </footer>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +291,55 @@
     <p>No health news articles available at the moment.</p>
 @endif
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addFavoriteButtons = document.querySelectorAll('.add-favorite');
 
-    
+        addFavoriteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var articleTitle = button.getAttribute('data-title');
+                var articleDescription = button.getAttribute('data-description');
+                var articleUrl = button.getAttribute('data-url');
+                console.log("Description: " + articleDescription);
+
+                // Create a new XMLHttpRequest object
+                var xhr = new XMLHttpRequest();
+
+                // Configure the request
+                xhr.open('POST', "{{ route('favorite.store') }}", true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                // Define the request payload
+                var data = JSON.stringify({
+                    _token: '{{ csrf_token() }}',
+                    title: articleTitle,
+                    description: articleDescription,
+                    url: articleUrl
+                });
+
+                // Define callbacks for request completion
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // Request was successful
+                        var response = JSON.parse(xhr.responseText);
+                        console.log(response.message);
+                    } else {
+                        // Request failed
+                        console.error('Request failed with status: ' + xhr.status);
+                    }
+                };
+
+                xhr.onerror = function () {
+                    // Request failed due to a network error
+                    console.error('Request failed due to network error');
+                };
+
+                // Send the request
+                xhr.send(data);
+            });
+        });
+    });
+</script>
+<script src="https://kit.fontawesome.com/fda9172bfe.js" crossorigin="anonymous"></script>
 
 @endsection

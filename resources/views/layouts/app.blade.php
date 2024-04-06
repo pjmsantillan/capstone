@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-expand-lg px-5 " style="border-bottom: 2px solid #002C70 !important;">
   <div class="container-fluid">
-     <img src={{URL('img/mylogo.jpg')}} alt="InsightHub Logo" width="150" height="80">
+     <img src={{URL('img/mylogo.jpg')}} alt="InsightHub Logo" width="150" height="80" ">
     <button class="navbar-toggler btn btn-outline-primary" type="button" data-bs-toggle="collapse" 
     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
     aria-expanded="false" aria-label="Toggle navigation"style="background-color: #002C70;"  >
@@ -29,12 +29,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
+      
+        </li>   
+        <a class="nav-link text-white" href="{{('news-articles')}}" style="color:black !important">Home</a> 
         @if(Auth::check())
           <a class="nav-link text-white" href="{{'profile'}}"style="color:black !important">{{ Auth::user()->name }}</a>
+          <a class="nav-link text-white" href="{{('signout')}}" style="color:black !important">SignOut</a> 
         @endif
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="{{('signout')}}" style="color:black !important">SignOut</a>
         </li>
       </ul>
     

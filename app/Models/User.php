@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Favorite;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
 
     public  function favorites(){
-        $this->hasMany(Favorite::class);
+        return $this->hasMany(Favorite::class);
     }
     public  function read(){
         $this->hasMany(Read::class);
